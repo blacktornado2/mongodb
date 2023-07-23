@@ -1,0 +1,89 @@
+- MongoDB Compass -> GUI application for using MongoDB
+- MongoDB Atlas -> Cloud service which provides MongoDB
+- mongo is the command-line shell that connects to a specific instance of mongod (It is deprecated now) 
+- mongod is the "Mongo Daemon" it's basically the host process for the database. 
+- Mongo Daemon handles data requests, manages data access and perform backfground management operations
+- by default port of mongod is 27017
+- We can write MongoDb commands in the mongosh in MongoDBCompass. mongosh is the MongoShell
+- There are some terms which are similar in SQl and NoSQL
+1. database -> database
+2. tables -> collections
+3. rows -> documents (BSON)
+4. columns -> fields
+- BSON: binary JSON
+- Object id is inserted automatically with insertion(It is just like primary key)
+
+Installation:
+
+MongoDB Deployment options:
+Locally hosted deployments: MongoDB Community and MongoDB Enterprise Advancements 
+Cloud Hosted Deployment: MongoDB Atlas
+
+by-default, only mongod and mongos will be installed
+mongos --version : check version of mongos
+mongod --version : check version of mongod
+mongo is deprecated will not run, try installing mongosh instead from mongodb website 
+* add mongosh to the path environment varible
+* We will run all commands in mongosh and not in mongos
+To open Mongo Shell, run mongosh in terminal
+
+Commands
+- quit ->                                   exit mongosh
+- cls  ->                                   clear screen
+- show dbs ->                               show all databases, will not show a database in which there is no collection(table)
+- show collections ->                       show all collections in the current db
+
+CREATE
+- use <dbName> ->                           switch to database, if doesn't - exist, then a new one created
+- db ->                                     show in which db we are now - working
+- db.createCollection(<collectionName>) ->  Create a new collection(table), use quotes("") while writing collection's name
+- db.createCollection(<collectionName>, options) ->  options is an optional field, but can be used to put validations in the collection
+
+
+- db.<collectionName>.insert({              Insert one/may document(row) in a collection(table). Legacy method
+    "name": "Ankit",
+    "age": 23
+})
+
+- db.<collectionName>.insertOne({           Insert a single document in a collection 
+    "name": "Ankit
+})
+
+- db.<collectionName>.insertMany([{          Inserts mutiple documents in a collection 
+    "name": "Ankit
+}, { "name": "A", age: 20}])
+
+* db.collection.insert is a legacy method, insertOne and insertMany are preferred over it
+
+READ
+- db.getCollectionInfos({name: <collectionName>})  -> Print the validations in the specified collection
+- db.<collection>.find()  -> Print all documents in the collection
+
+
+* In db.<collection>.find({abc}), the search will be continued till the end, will show mutiple documents if matched criteria
+* In db.<collection>.findOne({abc}), the search will be stopped as soon the the required row is found
+- db.collection.find({condition}).limit(2) : A maximum of 2 documents can be shown
+
+
+UPDATE 
+- db.collection.updateOne({ age: 23}, {$set: {name:"AB", age:50} } ) -> Update the first document found, with the updated conditions specified
+- db.collection.updateMany({ age: 29}, {$set: {name:"ABC", age:80} } ) -> Update all the documents found, with the updated conditions specified
+
+
+DELETE
+- db.dropDatabase() ->                      Delete the current database
+- db.<collecttionName>.drop() ->            Drop(delete) a collection
+- db.collection.deleteOne({age: 50})   -> Delete the first document with the condition specified
+- db.collection.deleteMany({age: 80})   -> Delete all documents with the conditin specified
+
+
+
+Doubts
+?? What is the difference b/w JSON and BSON, How does BSON work?
+?? mongoose npm package
+
+Resources:
+https://www.interviewbit.com/mongodb-interview-questions/
+https://www.javatpoint.com/mongodb-interview-questions
+https://mindmajix.com/mongodb-interview-questions
+
