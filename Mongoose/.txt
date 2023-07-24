@@ -1,0 +1,18 @@
+Mongoose is a wrapper around MongoDB
+
+Three main concepts inside Mongoose
+1. Schema
+2. Model
+3. Query
+
+
+
+Mongoose middleware/hooks
+Middleware (also called pre and post hooks) are functions which are passed control during execution of asynchronous functions.
+
+Types of hooks
+a) pre-hooks
+b) post-hooks
+
+Resources:
+https://www.youtube.com/watch?v=DZBGEVgL2eE&ab_channel=WebDevSimplified
