@@ -1,35 +1,19 @@
-const mongoose = require("mongoose");
-const User = require("./User.js");
+require("dotenv").config();
+const express = require("express");
 
-const connectDB = async () => {
-    try {
-        const res = await mongoose.connect("mongodb://localhost/testdb");
-        console.log("Connection Successful!!");
-    } catch (err) {
-        console.log(err);
-    }
+const connectDB = require("./config/connectDB");
+const userRouter = require("./routes/user.routes");
 
-    // 1. Create a new user
-    const user = new User({ name: "Ankit", age: 23 });
-    await user.save();
+const app = express();
 
-    // 2. Alternative way to create a new user
-    const newUser = await User.create({ name: "Ankit", age: 50 });
+const DB_URL = process.env.DB_URL;
+const PORT = process.env.PORT || 3000;
 
-    const newUser2 = new User({
-        name: "A",
-        age: 50,
-        hobbies: ["Reading", "Video Gaming"],
-        address: {
-            city: "Gurugram",
-            street: "LXMN Vihar"
-        }
-    });
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
-    await newUser2.save();
+connectDB(DB_URL);
 
-    const allUsers = await User.find();
-    console.log(allUsers);
-};
+app.use("/user", userRouter);
 
-connectDB();
+app.listen(PORT, () => console.log(`Server listening on PORT ${PORT}`));
