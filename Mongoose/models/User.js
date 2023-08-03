@@ -6,9 +6,8 @@ const addressSchema = new mongoose.Schema({
 });
 
 // *** IMPORTANT ***
-// The validation only runs when we make a model using .create() and .save() methods
-// Avoid findOneAndUpdate, findAndUpdate, findOneAndReplace and all the update methods because there is no valdiation in them
-// Instead first find that model using find() or findOne(), and then change the particular model and then save it using .save()
+// Prior to monoogse v4, validation only runs when we make a model using .create() and .save() methods
+// But in and after mongoose v4, validations are run by default in rest of the functions also, to disable them, we have to pass runValidators: false in 3rd parameter of findOneAndUpdate, findAndUpdate and findOneAndReplace functions
 
 // 1. Make a schema
 const userSchema = new mongoose.Schema({
